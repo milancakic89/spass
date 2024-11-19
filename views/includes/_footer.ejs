@@ -1,0 +1,155 @@
+  <script>
+    window.addEventListener('load', function() {
+
+      setTimeout(() => {
+        if (document.querySelector('.message')) {
+          document.body.removeChild(document.querySelector('.message'))
+        }
+      }, 5000)
+
+      if (document.location.href.includes('auth/signup')) {
+        const repeat_password = document.querySelector('.password-input-repeat');
+        const password_value = document.querySelector('.password-input');
+
+        password_value.addEventListener('change', (e) => {
+          const repeat_value = repeat_password.value;
+          if (e.target.value === repeat_value) {
+            repeat_password.style.borderColor = 'black';
+          }
+        })
+        repeat_password.addEventListener('input', (e) => {
+
+          if (e.target.value !== password_value.value) {
+            repeat_password.style.borderColor = 'red';
+          }
+          if (e.target.value === password_value.value) {
+            repeat_password.style.borderColor = 'black';
+          }
+        })
+      }
+    })
+
+    function addItem() {
+      if (document.querySelector('.add-item-modal')) {
+        return;
+      }
+      document.getElementById('add-item').disabled = true;
+      const backdrop = document.createElement('div');
+      backdrop.classList.add('backdrop')
+      backdrop.setAttribute('id', 'backdrop');
+      const form = document.createElement('form');
+      const h2 = document.createElement('h2');
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      const label2 = document.createElement('label');
+      const input2 = document.createElement('input');
+      const csrfInput = document.createElement('input');
+      const button = document.createElement('button');
+      const cancelBtn = document.createElement('span');
+
+      form.classList.add('add-item-modal');
+      form.setAttribute('method', "post");
+      form.setAttribute('action', "/dashboard/add");
+
+      h2.textContent = 'Add item';
+
+      label.textContent = 'Item name';
+
+      input.name = 'name';
+
+      label2.textContent = 'password';
+
+      input2.type = 'password';
+      input2.name = 'password';
+      input2.setAttribute('autocomplete', 'on')
+
+
+      csrfInput.name = '_csrf';
+      csrfInput.type = 'hidden';
+      csrfInput.value = document.getElementById('_csrf').value;
+
+
+      button.classList.add('default');
+      button.textContent = 'Add';
+      button.setAttribute('type', 'submit')
+
+      cancelBtn.classList.add('cancel-action');
+      cancelBtn.textContent = 'Cancel';
+      cancelBtn.style.textAlign = 'center';
+      cancelBtn.addEventListener('click', cancelItem)
+
+      form.appendChild(h2)
+      form.appendChild(label)
+      form.appendChild(input)
+      form.appendChild(label2)
+      form.appendChild(input2)
+      form.appendChild(csrfInput)
+      form.appendChild(button)
+      form.appendChild(cancelBtn)
+
+      backdrop.appendChild(form)
+      document.body.appendChild(backdrop);
+
+    }
+
+    function cancelItem() {
+      document.body.removeChild(document.body.querySelector('.backdrop'));
+      document.getElementById('add-item').disabled = false;
+    }
+
+    function copyPassToClipboard(password) {
+      if (document.querySelector('.message')) {
+        document.body.removeChild(document.querySelector('.message'))
+      }
+      navigator.clipboard.writeText(password);
+      const message = document.createElement('p');
+      message.textContent = 'Copied to clipboard';
+      message.classList.add('message');
+      message.classList.add('success');
+      document.body.appendChild(message);
+      setTimeout(() => {
+        if (document.querySelector('.message')) {
+          document.body.removeChild(document.querySelector('.message'))
+        }
+      }, 5000);
+
+    }
+
+    if (document.querySelector('.checklist-item')) {
+      let passwordChecklist = document.querySelectorAll('.checklist-item');
+
+      let validationRegex = [{
+          regex: /.{8,}/
+        }, // min 8 letters,
+        {
+          regex: /[0-9]/
+        }, // numbers from 0 - 9
+        {
+          regex: /[a-z]/
+        }, // letters from a - z (lowercase)
+        {
+          regex: /[A-Z]/
+        }, // letters from A-Z (uppercase),
+        {
+          regex: /[^A-Za-z0-9]/
+        } // special characters
+      ]
+
+      document.querySelector('.password-input').addEventListener('input', (e) => {
+        validationRegex.forEach((item, i) => {
+
+          let isValid = item.regex.test(e.target.value);
+
+          if (isValid) {
+            passwordChecklist[i].classList.add('checked');
+          } else {
+            passwordChecklist[i].classList.remove('checked');
+          }
+
+        })
+      })
+    }
+  </script>
+  </body>
+
+  </html>

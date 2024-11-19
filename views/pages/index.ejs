@@ -1,0 +1,76 @@
+<%- include('../includes/_header.ejs') %>
+<%- include('../includes/_nav.ejs') %>
+<div class="container">
+  <% if(auth !== null) {%>
+  <div>
+    <button class="default" id="add-item" onclick="addItem()">Add Entry</button>
+  </div>
+  <% } %>
+  <div class="items">
+    <div class="items__folder">
+      <% if (items) {%> <% for(let i = 0; i < items.length; i++) { %>
+      <% if(i <= 14){%>
+      <div class="item">
+        <span class="item-details">
+                  <span><%= items[i].name %></span>
+                  <span><%= items[i].mappedPass %></span>
+        </span>
+
+        <div class="item-actions">
+          <button class="icon icon-copy" onclick="copyPassToClipboard('<%= items[i].password %>')"><i class="fa-regular fa-copy"></i></button>
+          <form class="delete-form" action="/dashboard/delete" method="post">
+            <input type="hidden" name="id" value="<%= items[i].id %>"/>
+             <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+             <button type="submit" class="icon icon-delete"><i class="fa-regular fa-trash-can"></i></button>
+          </form>
+        </div>
+      </div>
+      <% } %>
+      <% } %> <%}%>
+    </div>
+    <div class="items__folder">
+            <% if (items) {%> <% for(let i = 0; i < items.length; i++) { %>
+            <% if(i > 14 && i <= 29 ){%>
+             <div class="item">
+               <span class="item-details">
+                 <span><%= items[i].name %></span>
+                 <span><%= items[i].mappedPass %></span>
+               </span>
+
+               <div class="item-actions">
+                 <button class="icon icon-copy" onclick="copyPassToClipboard('<%= items[i].password %>')"><i class="fa-regular fa-copy"></i></button>
+                 <form class="delete-form" action="/dashboard/delete" method="post">
+                   <input type="hidden" name="id" value="<%= items[i].id %>" />
+                   <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                   <button type="submit" class="icon icon-delete"><i class="fa-regular fa-trash-can"></i></button>
+                 </form>
+               </div>
+             </div>
+            <% } %>
+            <% } %> <%}%>
+    </div>
+    <div class="items__folder">
+                  <% if (items) {%> <% for(let i = 0; i < items.length; i++) { %>
+                  <% if(i > 29 ){%>
+                   <div class="item">
+                     <span class="item-details">
+                       <span><%= items[i].name %></span>
+                       <span><%= items[i].mappedPass %></span>
+                     </span>
+
+                     <div class="item-actions">
+                       <button class="icon icon-copy" onclick="copyPassToClipboard('<%= items[i].password %>')"><i class="fa-regular fa-copy"></i></button>
+                       <form class="delete-form" action="/dashboard/delete" method="post">
+                         <input type="hidden" name="id" value="<%= items[i].id %>" />
+                         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                         <button type="submit" class="icon icon-delete"><i class="fa-regular fa-trash-can"></i></button>
+                       </form>
+                     </div>
+                   </div>
+                  <% } %>
+                  <% } %> <%}%>
+    </div>
+  </div>
+   <input type="hidden" id="_csrf" name="_csrf" value="<%= csrfToken %>" />
+</div>
+<%- include('../includes/_footer.ejs') %>

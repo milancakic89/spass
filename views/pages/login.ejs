@@ -1,0 +1,18 @@
+<%- include('../includes/_header.ejs') %>
+<%- include('../includes/_nav.ejs') %>
+<%- include('../includes/_hero.ejs') %>
+<div class="authentication">
+  <div class="wrapper">
+    <h1>Login</h1>
+    <form action="/auth/login" method="POST">
+      <label>Email</label>
+      <input name="email" type="email" value="" />
+      <label>Password</label>
+      <input class="password-input" name="password" type="password" value="" autocomplete />
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button class="default">Login</button>
+      <p style="text-align: center;">Don't have account, click <a href="/auth/signup">here</a></p>
+    </form>
+  </div>
+</div>
+<%- include('../includes/_footer.ejs') %>

@@ -1,0 +1,15 @@
+<nav>
+  <a href="/" class="logo-link">
+    <h1 class="logo">sPASS</h1>
+  </a>
+  <ul>
+    <% if(auth !== null) {%>
+    <li>
+      <form action="/logout" method="post">
+        <label class="email"><%= email %></label>
+         <button class="link" type="submit">Logout</button>
+      </form>
+    </li>
+    <% } %>
+  </ul>
+</nav>

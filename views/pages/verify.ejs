@@ -1,0 +1,15 @@
+<%- include('../includes/_header.ejs') %>
+<%- include('../includes/_nav.ejs') %>
+<%- include('../includes/_hero.ejs') %>
+<div class="authentication">
+  <div class="wrapper">
+    <h1>Verify</h1>
+    <form action="/auth/verify" method="POST">
+      <label>Check your email for verification code</label>
+      <input name="verification" type="text" value="" />
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <button class="default">Verify</button>
+    </form>
+  </div>
+</div>
+<%- include('../includes/_footer.ejs') %>
