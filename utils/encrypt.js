@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 
-const encryptionKey = process.env.ENCRYPTION_KEY;
+const encryptionKey = Buffer.from(`${process.env.ENCRYPTION_KEY}`.padEnd(32, "\0"));
 
 exports.encryptText = (plainText) => {
   const iv = crypto.randomBytes(16);
