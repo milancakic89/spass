@@ -17,11 +17,11 @@ services: # services which our app going to use. (list of containers we want to 
     networks: # adding network
       - mern-app
     ports:
-      - "0.0.0.0:7000:8080"
+      - "0.0.0.0:80:80"
     depends_on:
       - mongo_db
     environment:
-      - PORT=8080
+      - PORT=80
       - MONGO_URL_DOCKER=mongodb://mongo_db:27017 #default
       - APP_EMAIL_PASSWORD=fqyl uquz zeyx bdkt #register email code for app usage 
       - SESSION_SECRET=SmeSpaginaL45poretal 
