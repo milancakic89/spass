@@ -23,9 +23,9 @@ services: # services which our app going to use. (list of containers we want to 
     environment:
       - PORT=80
       - MONGO_URL_DOCKER=mongodb://mongo_db:27017 #default
-      - APP_EMAIL_PASSWORD=fqyl uquz zeyx bdkt #register email code for app usage 
-      - SESSION_SECRET=SmeSpaginaL45poretal 
-      - ENCRYPTION_KEY=rasentimentalisaselitiseosecaji
+      - APP_EMAIL_PASSWORD= #register email code for app usage 
+      - SESSION_SECRET=
+      - ENCRYPTION_KEY=
 
 
 networks:
